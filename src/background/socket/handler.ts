@@ -1,3 +1,4 @@
+import { SocketAction, SocketActionData } from "$types/socket";
 import { SocketClient } from ".";
 
 export function socketHandler(this: SocketClient) {

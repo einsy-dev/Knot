@@ -16,7 +16,10 @@
     "target": "esnext",
     "verbatimModuleSyntax": false,
     "useDefineForClassFields": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "$types/*": ["./src/types/*"]
+    }
   },
   "include": ["./", "extension-env.d.ts", "global.d.ts"],
   "exclude": ["node_modules", "dist"]

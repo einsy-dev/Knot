@@ -1,3 +1,4 @@
+import { SocketAction, SocketCallback, SocketEvent } from "$types/socket";
 import { socket } from "./connect";
 
 export class SocketClient {
@@ -6,7 +7,7 @@ export class SocketClient {
   socket: WebSocket | undefined;
   interval: string | number | NodeJS.Timeout | undefined;
   retry: number = 0;
-  callbacks: { [action: string]: SocketActionCallback[] } = {};
+  callbacks: { [action: string]: SocketCallback<any>[] } = {};
 
   constructor(url: string = "ws://localhost:8081") {
     this.url = url;
@@ -15,19 +16,19 @@ export class SocketClient {
 
   connect = socket.bind(this);
 
-  addAction(action: SocketAction, callback: SocketActionCallback) {
+  addAction<k extends SocketAction>(action: k, callback: SocketCallback<k>) {
     if (!Array.isArray(this.callbacks[action])) {
       this.callbacks[action] = [];
     }
     this.callbacks[action].push(callback);
   }
 
-  removeAction(action: SocketAction, callback: SocketActionCallback) {
+  removeAction<k extends SocketAction>(action: k, callback: SocketCallback<k>) {
     this.callbacks[action] = this.callbacks[action].filter((cb) => cb !== callback);
   }
 
-  send(message: SendMessage) {
-    this.socket?.send(JSON.stringify(message));
+  send(data: SocketEvent) {
+    this.socket?.send(JSON.stringify(data));
   }
 
   reload(url?: string) {

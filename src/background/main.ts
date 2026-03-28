@@ -1,7 +1,7 @@
 import { Socket } from "./socket";
 
 async function main() {
-  Socket.addAction("connect", () => {
+  Socket.addAction("connect", (data) => {
     console.log("connect");
   });
 
