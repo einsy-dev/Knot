@@ -18,7 +18,9 @@
     "useDefineForClassFields": true,
     "skipLibCheck": true,
     "paths": {
-      "$types/*": ["./src/types/*"]
+      "$src/*": ["./src/*"],
+      "$types/*": ["./src/types/*"],
+      "$utils/*": ["./src/utils/*"]
     }
   },
   "include": ["./", "extension-env.d.ts", "global.d.ts"],

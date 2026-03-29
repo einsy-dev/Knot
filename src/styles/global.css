@@ -1,1 +1,6 @@
 @import 'tailwindcss';
+
+@theme {
+	--color-dark: #393a3a;
+	--background-image-main: url("../../public/1280x800.png");
+}

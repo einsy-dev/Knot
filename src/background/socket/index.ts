@@ -1,5 +1,6 @@
 import { SocketAction, SocketCallback, SocketEvent } from "$types/socket";
 import { socket } from "./connect";
+import { handler } from "./handler";
 
 export class SocketClient {
   id: string | undefined; // extension id
@@ -15,6 +16,7 @@ export class SocketClient {
   }
 
   connect = socket.bind(this);
+  handler = handler.bind(this);
 
   addAction<k extends SocketAction>(action: k, callback: SocketCallback<k>) {
     if (!Array.isArray(this.callbacks[action])) {
@@ -27,7 +29,8 @@ export class SocketClient {
     this.callbacks[action] = this.callbacks[action].filter((cb) => cb !== callback);
   }
 
-  send(data: SocketEvent) {
+  send(data?: SocketEvent) {
+    if (!data) return;
     this.socket?.send(JSON.stringify(data));
   }
 

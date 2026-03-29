@@ -1,17 +1,12 @@
+import { TabInfo } from "$types/socket";
+import { tabUpdate } from "./tabUpdate";
+
 export class Tab {
-  async create({ url, active }: { url: string; active: boolean }): Promise<TabData | undefined> {
-    return chrome.tabs
-      .create({ url, active })
-      .then(this.getTabData)
-      .catch((err) => {
-        console.log(err);
-        return undefined;
-      });
-  }
+  onUpdate = tabUpdate.bind(this);
 
   async update(
     { tabId, url, active }: { tabId: number; url: string; active: boolean } = { tabId: 0, url: "", active: false }
-  ): Promise<TabData | undefined> {
+  ): Promise<TabInfo | undefined> {
     return chrome.tabs
       .update(tabId, { url, active })
       .then(this.getTabData)
@@ -31,11 +26,10 @@ export class Tab {
       });
   }
 
-  private getTabData(tab?: chrome.tabs.Tab): TabData | undefined {
+  getTabData(tab?: chrome.tabs.Tab): TabInfo | undefined {
     if (!tab) return undefined;
-
     return {
-      id: tab.id!,
+      tabId: tab.id!,
       status: tab.status!,
       title: tab.title!,
       active: tab.active,
@@ -44,12 +38,4 @@ export class Tab {
   }
 }
 
-interface TabData {
-  id: number;
-  title: string;
-  status: string;
-  active: boolean;
-  url: string;
-}
-
-export type { TabData };
+export const Tabs = new Tab();
