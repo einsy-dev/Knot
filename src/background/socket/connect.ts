@@ -9,7 +9,7 @@ export function socket(this: SocketClient) {
     this.handler();
     this.interval = setInterval(() => {
       if (this.socket!.readyState === WebSocket.OPEN) {
-        this.send({ id: this.id, ping: "ping" });
+        this.send({ id: this.id!, ping: "ping" });
       }
     }, 15e3);
   };

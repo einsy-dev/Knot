@@ -1,4 +1,4 @@
-interface ExtMessage {
+export interface ExtMessage {
   socket: {
     reload: {};
   };

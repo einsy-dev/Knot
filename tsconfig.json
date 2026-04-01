@@ -18,7 +18,6 @@
     "useDefineForClassFields": true,
     "skipLibCheck": true,
     "paths": {
-      "$src/*": ["./src/*"],
       "$types/*": ["./src/types/*"],
       "$utils/*": ["./src/utils/*"]
     }

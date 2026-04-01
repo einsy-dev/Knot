@@ -1,24 +1,23 @@
 import { setIconStatus } from "./chrome/icon";
-import { Tabs } from "./chrome/tab";
 import { Socket } from "./socket";
+import { Tab } from "./tab";
 
 async function main() {
-  let tabUpdate: { listen: () => void; close: () => void };
   setIconStatus("red");
 
   Socket.addAction("connect", (data, socket) => {
     socket.id = data?.id;
 
-    tabUpdate = Tabs.onUpdate((tabId, changeInfo, tab) => {
-      socket.send({ status: Tabs.getTabData(tab) });
+    Tab.addAction("update", (tabInfo) => {
+      socket.send({ id: socket.id, status: tabInfo });
     });
-    tabUpdate.listen();
+
     setIconStatus("#00FF00");
   });
 
   Socket.addAction("close", () => {
     setIconStatus("red");
-    tabUpdate?.close();
+    // tabUpdate?.close();
   });
 
   Socket.addAction("tab", (data) => {

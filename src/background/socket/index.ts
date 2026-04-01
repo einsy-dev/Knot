@@ -1,6 +1,6 @@
-import { SocketAction, SocketCallback, SocketEvent } from "$types/socket";
 import { socket } from "./connect";
 import { handler } from "./handler";
+import { SocketAction, SocketCallback, SocketEvent } from "./types";
 
 export class SocketClient {
   id: string | undefined; // extension id
@@ -18,14 +18,14 @@ export class SocketClient {
   connect = socket.bind(this);
   handler = handler.bind(this);
 
-  addAction<k extends SocketAction>(action: k, callback: SocketCallback<k>) {
+  addAction<k extends keyof SocketAction>(action: k, callback: SocketCallback<k>) {
     if (!Array.isArray(this.callbacks[action])) {
       this.callbacks[action] = [];
     }
     this.callbacks[action].push(callback);
   }
 
-  removeAction<k extends SocketAction>(action: k, callback: SocketCallback<k>) {
+  removeAction<k extends keyof SocketAction>(action: k, callback: SocketCallback<k>) {
     this.callbacks[action] = this.callbacks[action].filter((cb) => cb !== callback);
   }
 

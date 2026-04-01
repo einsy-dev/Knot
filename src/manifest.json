@@ -5,7 +5,7 @@
   "version": "0.0.2",
   "name": "Knot",
   "description": "Knot is a powerful tool that connects your local applications and the browser. By establishing a secure, high-speed connection.",
-  "permissions": ["tabs", "activeTab", "scripting"],
+  "permissions": ["tabs", "activeTab"],
   "icons": {
     "16": "images/16x16.png",
     "32": "images/32x32.png",

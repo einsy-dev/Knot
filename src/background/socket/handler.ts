@@ -1,16 +1,16 @@
-import { SocketAction, SocketActionData } from "$types/socket";
 import { SocketClient } from ".";
+import { SocketAction } from "./types";
 
 export function handler(this: SocketClient) {
-  this.socket!.addEventListener("message", (event) => {
-    const data: SocketActionData = JSON.parse(event.data);
+  this.socket?.addEventListener("message", (event) => {
+    const data: SocketAction = JSON.parse(event.data);
 
     for (let action in data) {
       let cb = this.callbacks[action];
       if (!cb.length) return;
 
       for (let c of cb) {
-        c(data[action as SocketAction], this);
+        c(data[action as keyof SocketAction], this);
       }
     }
   });
