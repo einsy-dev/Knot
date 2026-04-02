@@ -1,4 +1,4 @@
-import { setIconStatus } from "./chrome/icon";
+import { setIconStatus } from "./app/icon";
 import { Socket } from "./socket";
 import { Tab } from "./tab";
 

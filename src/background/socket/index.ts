@@ -1,5 +1,4 @@
 import { socket } from "./connect";
-import { handler } from "./handler";
 import { SocketAction, SocketCallback, SocketEvent } from "./types";
 
 export class SocketClient {
@@ -16,7 +15,6 @@ export class SocketClient {
   }
 
   connect = socket.bind(this);
-  handler = handler.bind(this);
 
   addAction<k extends keyof SocketAction>(action: k, callback: SocketCallback<k>) {
     if (!Array.isArray(this.callbacks[action])) {

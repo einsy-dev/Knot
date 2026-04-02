@@ -1,5 +1,5 @@
-import { SocketClient } from ".";
-import { SocketAction } from "./types";
+import { SocketClient } from "..";
+import { SocketAction } from "../types";
 
 export function handler(this: SocketClient) {
   this.socket?.addEventListener("message", (event) => {

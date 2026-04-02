@@ -1,4 +1,5 @@
-import { SocketClient } from ".";
+import { SocketClient } from "..";
+import { handler } from "./handler";
 
 export function socket(this: SocketClient) {
   if (!this.url) return;
@@ -6,7 +7,7 @@ export function socket(this: SocketClient) {
 
   this.socket.onopen = () => {
     this.retry = 0;
-    this.handler();
+    handler.call(this);
     this.interval = setInterval(() => {
       if (this.socket!.readyState === WebSocket.OPEN) {
         this.send({ id: this.id!, ping: "ping" });

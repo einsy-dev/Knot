@@ -1,5 +1,5 @@
-import { onActive } from "./onActive";
-import { onUpdate } from "./onUpdate";
+import { onActive } from "./actions/onActive";
+import { onUpdate } from "./actions/onUpdate";
 import { TabEvent, TabEventCallback, TabInfo } from "./types";
 
 export class TabClient {

@@ -1,7 +1,7 @@
 import { compare } from "$utils/compare";
 import { debounce } from "$utils/debounce";
-import { TabClient } from ".";
-import { Callback, TabInfo } from "./types";
+import { TabClient } from "..";
+import { Callback, TabInfo } from "../types";
 
 export function onUpdate(this: TabClient) {
   let state: {

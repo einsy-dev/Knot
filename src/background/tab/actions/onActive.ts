@@ -1,4 +1,4 @@
-import { TabClient } from ".";
+import { TabClient } from "..";
 
 export function onActive(this: TabClient) {
   const handleActive = (activeInfo: chrome.tabs.OnActivatedInfo) => {
